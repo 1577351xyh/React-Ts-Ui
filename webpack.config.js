@@ -32,7 +32,7 @@ module.exports = function (env, argv) {
         {
           test: /\.tsx?$/, loader: 'awesome-typescript-loader'
         },
-        //less
+        //scss
         { test: /\.scss$/i, use: ['style-loader', 'css-loader', 'sass-loader'] },
       ]
     },
@@ -42,6 +42,18 @@ module.exports = function (env, argv) {
       port: 3000,
       //进度条
       progress: true,
+    },
+    resolve: {
+      // 后缀
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      // 别名
+      alias: {
+        stylesheets: path.resolve(__dirname, 'stylesheets'),
+        examples: path.resolve(__dirname, 'examples'),
+        lib: path.resolve(__dirname, 'lib'),
+      },
+      // 没有路径时,webpack默认会在这个路径下查找
+      // modules: [path.resolve(__dirname, 'include'), 'node_modules']
     },
     plugins: [
       new HtmlWebpackPlugin({
