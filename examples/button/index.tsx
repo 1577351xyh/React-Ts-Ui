@@ -1,17 +1,14 @@
 import * as React from 'react'
 import './index.scss'
-import classnames from 'classnames'
+import * as classnames from 'classnames'
+import typeButton from 'type/button'
 
-interface Iprops {
-  type?: 'primary' | 'dashed' | 'link'
-}
-
-export default function Button(props: Iprops) {
-  const className = classnames({
+export default (props: typeButton) => {
+  const className: string = classnames({
     button: true,
     primart: props.type === 'primary',
+    link: props.type === 'link',
+    dashed: props.type === 'dashed',
   })
-
-  console.log(props)
-  return <div className={className}>按钮</div>
+  return <div className={className}>{props.children && props.children}</div>
 }

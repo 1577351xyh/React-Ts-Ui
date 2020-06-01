@@ -51,9 +51,12 @@ module.exports = function (env, argv) {
         stylesheets: path.resolve(__dirname, 'stylesheets'),
         examples: path.resolve(__dirname, 'examples'),
         lib: path.resolve(__dirname, 'lib'),
+        type: path.resolve(__dirname, 'type'),
       },
       // 没有路径时,webpack默认会在这个路径下查找
-      // modules: [path.resolve(__dirname, 'include'), 'node_modules']
+      modules: [
+        path.resolve(__dirname, 'stylesheets'), 'node_modules'
+      ]
     },
     plugins: [
       new HtmlWebpackPlugin({

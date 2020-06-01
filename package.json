@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/1577351xyh/React-Ts-Ui#readme",
   "dependencies": {
+    "@types/classnames": "^2.2.10",
     "awesome-typescript-loader": "^5.2.1",
     "typescript": "^3.9.3",
     "webpack": "^4.43.0",
