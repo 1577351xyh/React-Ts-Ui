@@ -22,11 +22,28 @@
   font-size: $font-size;
   box-shadow: $box-shadow;
   border-radius: 4px;
+  transition: all 1s;
+  &:hover {
+    border-color: $bgc-color;
+    color: $bgc-color;
+  }
 }
 .primart {
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
   background-color: $bgc-color;
+  a {
+    color: #fff;
+  }
+  &:hover {
+    border-color: $bgc-color;
+    color: #fff;
+  }
+}
+.buuton-icon {
+  svg {
+    margin-right: 0.5em;
+  }
 }
 .dashed {
   color: $font-color;
