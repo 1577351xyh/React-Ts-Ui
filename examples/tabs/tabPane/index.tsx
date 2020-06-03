@@ -10,7 +10,6 @@ interface TabPane {
 }
 export default (props: TabPane) => {
   const active = useContext(defaultActiveKey)
-  
   console.log(active)
   return active === props.tab ? (
     <div>

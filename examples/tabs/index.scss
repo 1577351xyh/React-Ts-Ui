@@ -1,0 +1,35 @@
+@import 'color';
+
+.title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  span {
+    height: 46px;
+    display: flex;
+    align-items: center;
+    margin: 0px 8px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+  .line {
+    position: absolute;
+    height: 2px;
+    right: 0;
+    bottom: 0;
+    background-color: $bgc-color;
+    left: 0px;
+    width: 37px;
+    transition: all 0.6s;
+  }
+}
+.title::before {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  border-bottom: 1px solid #f0f0f0;
+  content: '';
+}
