@@ -1,6 +1,7 @@
 import * as React from 'react'
 import '../index.scss'
-// import { useState } from 'react'
+import { defaultActiveKey } from '../index'
+import { useContext } from 'react'
 
 interface TabPane {
   children?: string | ''
@@ -8,11 +9,12 @@ interface TabPane {
   key: any
 }
 export default (props: TabPane) => {
-  // console.log(props)
-  // const [active, setActive] = useState(0)
-  return (
+  const active = useContext(defaultActiveKey)
+  
+  console.log(active)
+  return active === props.tab ? (
     <div>
       <div>{props.children}</div>
     </div>
-  )
+  ) : null
 }
