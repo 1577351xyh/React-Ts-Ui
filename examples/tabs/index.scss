@@ -24,6 +24,10 @@
     width: 37px;
     transition: all 0.6s;
   }
+  .disabled {
+    color: rgba(0, 0, 0, 0.25);
+    cursor: not-allowed;
+  }
 }
 .title::before {
   position: absolute;
