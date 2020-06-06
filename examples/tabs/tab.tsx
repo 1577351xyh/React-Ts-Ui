@@ -1,23 +1,30 @@
 import * as React from 'react'
-import './index.scss'
 import { createContext, useState, useRef } from 'react'
-// import * as classnames from 'classnames'
+import * as classnames from 'classnames'
 
 export const defaultActiveKey = createContext('')
 interface Tabs {
   defaultActiveKey: string | ''
   children: React.ReactNode[]
   onChange(args: string): void
+  tabPosition?: string
 }
 
 export default (props: Tabs) => {
-  // const className: string = classnames({
-  //   button: true,
-  // })
+  const { 
+    tabPosition, 
+    children, 
+    onChange
+  } = props
+  const className: string = classnames({
+    vertical: tabPosition,
+    'xyh-tabs': true,
+  })
   const line: any = useRef()
+  const list: any = useRef()
   let childrenArray =
-    props.children &&
-    props.children.map((item: any) => {
+    children &&
+    children.map((item: any) => {
       return {
         tab: item.props.tab,
         key: item.key,
@@ -27,7 +34,6 @@ export default (props: Tabs) => {
 
   const [active, setActive] = useState(childrenArray[0].tab)
 
-  console.log(childrenArray)
   let element: Array<React.ReactNode> = childrenArray.map((Element: any) => {
     return (
       <span
@@ -44,16 +50,19 @@ export default (props: Tabs) => {
     const name: string = item.tab
     if (item.disabled) return
     setActive(name)
+    onChange(item.key)
     let arr: Array<string> = childrenArray.map((item) => item.tab)
     let index: number = arr.indexOf(name)
-    let title = document.getElementsByTagName('span')
-    line.current.style.left = title[index].offsetLeft + 'px'
+    let title = list.current.getElementsByTagName('span')
+    tabPosition
+      ? (line.current.style.top = title[index].offsetTop - 5 + 'px')
+      : (line.current.style.left = title[index].offsetLeft + 'px')
   }
 
   return (
-    <div className="xyh-tabs">
+    <div className={className}>
       <defaultActiveKey.Provider value={active}>
-        <div className="title">
+        <div className="title" ref={list}>
           {element}
           <div className="line" ref={line}></div>
         </div>
