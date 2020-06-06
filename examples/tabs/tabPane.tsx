@@ -7,6 +7,7 @@ interface TabPane {
   tab: string
   key: any
   disabled?: boolean
+  icon?: string
 }
 export default (props: TabPane) => {
   const active = useContext(defaultActiveKey)

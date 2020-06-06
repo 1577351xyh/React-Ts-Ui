@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { createContext, useState, useRef } from 'react'
 import * as classnames from 'classnames'
+import Icon from '../Icon/icon'
 
 export const defaultActiveKey = createContext('')
 interface Tabs {
@@ -11,11 +12,7 @@ interface Tabs {
 }
 
 export default (props: Tabs) => {
-  const { 
-    tabPosition, 
-    children, 
-    onChange
-  } = props
+  const { tabPosition, children, onChange } = props
   const className: string = classnames({
     vertical: tabPosition,
     'xyh-tabs': true,
@@ -29,18 +26,21 @@ export default (props: Tabs) => {
         tab: item.props.tab,
         key: item.key,
         disabled: item.props.disabled,
+        icon: item.props.icon,
       }
     })
 
   const [active, setActive] = useState(childrenArray[0].tab)
 
   let element: Array<React.ReactNode> = childrenArray.map((Element: any) => {
+    let icons = Element.icon ? <Icon name={Element.icon}></Icon> : null
     return (
       <span
         onClick={() => tabClick(Element)}
         className={Element.disabled ? 'disabled' : ''}
         key={Element.key}
       >
+        {icons}
         {Element.tab}
       </span>
     )

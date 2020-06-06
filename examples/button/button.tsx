@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as classnames from 'classnames'
-import Icon from '../icon/index'
+import Icon from '../Icon/icon'
 import { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react'
 
 interface BaseButtonProps {
@@ -10,6 +10,7 @@ interface BaseButtonProps {
   icon?: string
   href?: string
   className?: string
+  disabled?: boolean;
 }
 type ButtonSize = 'lg' | 'sm'
 type ButtonType = 'primary' | 'default' | 'danger' | 'link' | 'dashed'
@@ -31,7 +32,7 @@ export const Button: FC<ButtonProps> = (props) => {
     [`btn-${types}`]: types,
     [`btn-${size}`]: size,
     'buuton-icon': types && props.children,
-    disabled: types === 'link' && disabled,
+    'disabled':disabled,
   })
 
   let icon
