@@ -6,7 +6,7 @@ interface Icon {
 }
 export default (props: Icon) => {
   return (
-    <svg className="icon" aria-hidden="true">
+    <svg className="Burn-icon" aria-hidden="true">
       <use xlinkHref={`#icon-${props.name}`}></use>
     </svg>
   )

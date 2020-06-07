@@ -28,10 +28,10 @@ export const Button: FC<ButtonProps> = (props) => {
     href,
     ...restProps
   } = props
-  const classNames: string = classnames('button', className, {
-    [`btn-${types}`]: types,
-    [`btn-${size}`]: size,
-    'buuton-icon': types && props.children,
+  const classNames: string = classnames('Burn-button', className, {
+    [`Burn-btn-${types}`]: types,
+    [`Burn-btn-${size}`]: size,
+    'Burn-buuton-icon': types && props.children,
     'disabled':disabled,
   })
 

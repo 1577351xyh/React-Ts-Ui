@@ -16,11 +16,11 @@ export interface MenuItemProps {
   style?: React.CSSProperties
 }
 
-export const Menu: FC<MenuItemProps> = (props) => {
+export const MenuItem: FC<MenuItemProps> = (props) => {
   const { className, index, style, children, disabled } = props
   const context = useContext(MenuContext)
-  const classes = classNames('menu', className, {
-    'is-disable': disabled,
+  const classes = classNames('Burn-menuItme', className, {
+    'is-disabled': disabled,
     'is-active': context.index === index,
   })
   const handleClick = () => {
@@ -35,4 +35,5 @@ export const Menu: FC<MenuItemProps> = (props) => {
   )
 }
 
-export default Menu
+MenuItem.displayName = 'MenuItem'
+export default MenuItem

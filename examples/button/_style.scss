@@ -1,4 +1,4 @@
-.button {
+.Burn-button {
   font-weight: $btn-font-weight;
   line-height: $btn-line-height;
   position: relative;
@@ -36,7 +36,7 @@
   }
 }
 
-.btn-lg {
+.Burn-btn-lg {
   @include button-size(
     $btn-padding-y-lg,
     $btn-padding-x-lg,
@@ -44,7 +44,7 @@
     $btn-border-radius-lg
   );
 }
-.btn-sm {
+.Burn-btn-sm {
   @include button-size(
     $btn-padding-y-sm,
     $btn-padding-x-sm,
@@ -52,19 +52,19 @@
     $btn-border-radius-sm
   );
 }
-.btn-primary {
+.Burn-btn-primary {
   @include button-style($primary, $primary, $white);
 }
-.btn-danger {
+.Burn-btn-danger {
   @include button-style($danger, $danger, $white);
 }
-.btn-dashed {
+.Burn-btn-dashed {
   color: $body-color;
   border-color: $body-color;
   border-style: dashed;
 }
 
-.btn-default {
+.Burn-btn-default {
   @include button-style(
     $white,
     $gray-400,
@@ -75,7 +75,7 @@
   );
 }
 
-.btn-link {
+.Burn-btn-link {
   font-weight: $font-weight-normal;
   color: $btn-link-color;
   text-decoration: $link-decoration;
@@ -99,7 +99,7 @@
     pointer-events: none;
   }
 }
-.buuton-icon {
+.Burn-buuton-icon {
   svg {
     margin-right: 0.5em;
   }
