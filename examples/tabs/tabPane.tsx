@@ -2,7 +2,7 @@ import * as React from 'react'
 import { defaultActiveKey } from './tab'
 import { useContext } from 'react'
 
-interface TabPane {
+export interface TabPane {
   children?: string | ''
   tab: string
   key: any

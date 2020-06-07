@@ -20,7 +20,11 @@ export const MenuContext = createContext<IMenuContext>({ index: '0' })
 export const Menu: FC<MenuProps> = (props) => {
   const { className, mode, style, children, defaultIndex, onSelect } = props
   const [currentAcitive, setcurrentAcitive] = useState(defaultIndex)
-  const classes = classNames('Burn-menu', className, {})
+  const classes = classNames('Burn-menu', className, {
+    'menu-vertical': mode === 'vertical',
+    'menu-horizontal': mode !== 'vertical',
+  })
+
   const handeClick = (index: string) => {
     setcurrentAcitive(index)
   }
@@ -36,7 +40,7 @@ export const Menu: FC<MenuProps> = (props) => {
         MenuItemProps
       >
       const { displayName } = childElement.type
-      if (displayName === 'MenuItem') {
+      if (displayName === 'MenuItem' || displayName === 'SubMenu') {
         return React.cloneElement(childElement, {
           index: index.toString(),
         })
@@ -56,5 +60,8 @@ export const Menu: FC<MenuProps> = (props) => {
     </ul>
   )
 }
-
+Menu.defaultProps = {
+  defaultIndex: '0',
+  mode: 'horizontal',
+}
 export default Menu

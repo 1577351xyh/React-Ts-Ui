@@ -1,14 +1,7 @@
-import React, {
-  FC,
-  useState,
-  createContext,
-  useContext,
-  CSSProperties,
-} from 'react'
+import React, { FC, useContext } from 'react'
 import classNames from 'classnames'
 import { MenuContext } from './menu'
 
-type MenuMode = 'horizontal' | 'vertical'
 export interface MenuItemProps {
   index?: string
   disabled?: boolean
@@ -19,10 +12,12 @@ export interface MenuItemProps {
 export const MenuItem: FC<MenuItemProps> = (props) => {
   const { className, index, style, children, disabled } = props
   const context = useContext(MenuContext)
-  const classes = classNames('Burn-menuItme', className, {
+  const classes = classNames('Burn-menu-item', className, {
     'is-disabled': disabled,
     'is-active': context.index === index,
   })
+  console.log(context.index)
+  console.log(index)
   const handleClick = () => {
     if (context.onSelect && typeof index === 'string' && !disabled) {
       context.onSelect(index)
