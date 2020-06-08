@@ -48,14 +48,14 @@ module.exports = function (env, argv) {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
       // 别名
       alias: {
-        stylesheets: path.resolve(__dirname, 'stylesheets'),
+        stylesheets: path.resolve(__dirname, 'src/stylesheets'),
         examples: path.resolve(__dirname, 'examples'),
         lib: path.resolve(__dirname, 'lib'),
         type: path.resolve(__dirname, 'type'),
       },
       // 没有路径时,webpack默认会在这个路径下查找
       modules: [
-        path.resolve(__dirname, 'stylesheets'), 'node_modules'
+        path.resolve(__dirname, 'src/stylesheets'), 'node_modules'
       ]
     },
     plugins: [
