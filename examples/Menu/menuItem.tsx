@@ -16,10 +16,9 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
     'is-disabled': disabled,
     'is-active': context.index === index,
   })
-  console.log(context.index)
-  console.log(index)
   const handleClick = () => {
     if (context.onSelect && typeof index === 'string' && !disabled) {
+      alert(index)
       context.onSelect(index)
     }
   }

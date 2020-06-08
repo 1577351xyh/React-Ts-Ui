@@ -9,16 +9,28 @@ export interface MenuProps {
   style?: CSSProperties
   defaultIndex?: string
   onSelect?: (selectedIndex: string) => void
+  /**设置子菜单的默认打开 只在纵向模式下生效 */
+  defaultOpenSubMenus?: string[]
 }
 
 interface IMenuContext {
   index: string
   onSelect?: (selectedIndex: string) => void
+  mode?: MenuMode
+  defaultOpenSubMenus?: string[]
 }
 
 export const MenuContext = createContext<IMenuContext>({ index: '0' })
+
 export const Menu: FC<MenuProps> = (props) => {
-  const { className, mode, style, children, defaultIndex, onSelect } = props
+  const {
+    className,
+    mode,
+    style,
+    children,
+    defaultIndex,
+    defaultOpenSubMenus,
+  } = props
   const [currentAcitive, setcurrentAcitive] = useState(defaultIndex)
   const classes = classNames('Burn-menu', className, {
     'menu-vertical': mode === 'vertical',
@@ -32,6 +44,8 @@ export const Menu: FC<MenuProps> = (props) => {
   const passedContest: IMenuContext = {
     index: currentAcitive ? currentAcitive : '0',
     onSelect: handeClick,
+    mode,
+    defaultOpenSubMenus,
   }
 
   const renderChildren = () => {
@@ -63,5 +77,6 @@ export const Menu: FC<MenuProps> = (props) => {
 Menu.defaultProps = {
   defaultIndex: '0',
   mode: 'horizontal',
+  defaultOpenSubMenus: [],
 }
 export default Menu
