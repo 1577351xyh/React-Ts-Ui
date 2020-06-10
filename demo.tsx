@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { default as Buttons } from './examples/Button/index'
+import Buttons from './examples/Button/index'
 import Icon from './examples/Icon/icon'
 import Tabs from './examples/Tabs/tab'
 import TabPane from './examples/Tabs/tabPane'
@@ -88,7 +88,6 @@ export default function Button() {
           Content of Tab Pane 4
         </TabPane>
       </Tabs>
-      <span id="a"></span>
     </div>
   )
 }
