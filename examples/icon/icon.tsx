@@ -4,10 +4,12 @@ import './index.scss'
 interface Icon {
   name: string,
 }
-export default (props: Icon) => {
+const Icon: React.FC<Icon>=(props) => {
   return (
     <svg className="Burn-icon" aria-hidden="true">
       <use xlinkHref={`#icon-${props.name}`}></use>
     </svg>
   )
 }
+export default Icon
+

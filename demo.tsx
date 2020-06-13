@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useState } from 'react'
 import Buttons from './examples/Button/index'
 import Icon from './examples/Icon/icon'
 import Tabs from './examples/Tabs/tab'
@@ -6,14 +7,35 @@ import TabPane from './examples/Tabs/tabPane'
 import Menu from './examples/Menu/menu'
 import MenuItem from './examples/Menu/menuItem'
 import SubMenu from './examples/Menu/subMenu'
+import Input from './examples/Input'
 
 export default function Button() {
-  function callback(key: any) {
-    console.log(key)
+  // function callback(key: any) {
+  //   console.log(key)
+  // }
+  function x() {
+    console.log(a)
   }
+  const [a, seta] = useState('1')
   return (
     <div>
-      <Menu
+      <button onClick={x}></button>
+      <Input
+        style={{ width: '300px' }}
+        placeholder="input with icon"
+        icon="search"
+        defaultValue={a}
+        onChange={(e) => {
+          seta(e.target.value)
+        }}
+      />
+      <Input
+        style={{ width: '300px' }}
+        defaultValue="prepend text"
+        prepend="https://"
+      />
+      <Input style={{ width: '300px' }} defaultValue="google" append=".com" />
+      {/* <Menu
         defaultIndex="0"
         onSelect={(index) => {
           console.log(index)
@@ -74,8 +96,8 @@ export default function Button() {
           Content of Tab Pane 4
         </TabPane>
       </Tabs>
-      <Tabs defaultActiveKey="1" onChange={callback} tabPosition="left">
-        <TabPane tab="Tab 1" key="1">
+      <Tabs defaultActiveKey="1" onChange={callback} tabPosition="left"> */}
+      {/* <TabPane tab="Tab 1" key="1">
           Content of Tab Pane 1
         </TabPane>
         <TabPane tab="Tab 2" disabled key="2">
@@ -87,7 +109,7 @@ export default function Button() {
         <TabPane tab="Tab 4" key="4">
           Content of Tab Pane 4
         </TabPane>
-      </Tabs>
+      </Tabs> */}
     </div>
   )
 }
