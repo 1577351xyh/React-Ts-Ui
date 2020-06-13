@@ -2,10 +2,13 @@
 @import 'config';
 //初始项
 @import 'reboot';
+// 继承
 @import 'mixin';
+// 动画
+@import 'animation';
 //Button
 @import '../../examples/button/style';
 //Tabs
 @import '../../examples/tabs/style';
 //Menu
-@import '../../examples//Menu/style'
+@import '../../examples//Menu/style';

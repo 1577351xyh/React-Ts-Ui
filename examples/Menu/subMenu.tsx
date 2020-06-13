@@ -7,6 +7,8 @@ import React, {
 import classNames from 'classnames'
 import { MenuContext } from './menu'
 import { MenuItemProps } from './menuItem'
+import Icon from '../Icon/icon'
+import Transition from '../Transition'
 
 export interface SubMenu {
   index?: string
@@ -17,14 +19,11 @@ const SubMenu: FC<SubMenu> = (props) => {
   const { index, title, className, children } = props
   const context = useContext(MenuContext)
   const openedSubMenus = context.defaultOpenSubMenus as Array<string>
-  console.log(index)
-  console.log(openedSubMenus)
   const isOpend =
     index && context.mode === 'vertical'
       ? openedSubMenus.indexOf(index) > -1
       : false
 
-  console.log(isOpend)
   // 展开
   const [menuOpen, setmenuOpen] = useState(isOpend)
   const classes = classNames('Burn-menu-item Burn-submenu-item', {
@@ -85,12 +84,19 @@ const SubMenu: FC<SubMenu> = (props) => {
         return null
       }
     )
-    return <ul className={submenuClasses}>{childrenComponent}</ul>
+    return (
+      <Transition in={menuOpen} timeout={300} animation="zoom-in-top">
+        <ul className={submenuClasses}>{childrenComponent}</ul>
+      </Transition>
+    )
   }
   return (
     <li key={index} className={classes} {...hoverEvent}>
       <div className="Burn-submene-title" {...clickEvent}>
         {title}
+        <div className="tranfrom">
+          <Icon name="xia1"></Icon>
+        </div>
       </div>
       {renderChildren()}
     </li>

@@ -28,9 +28,19 @@
   }
   .Burn-submenu-item {
     position: relative;
-    .Burn-submenu-title {
+    .Burn-submene-title {
       display: flex;
       align-items: center;
+      .tranfrom {
+        transition: all 0.6s;
+        transform-origin: center center;
+        margin-left: 0.5em;
+      }
+      &:hover {
+        .tranfrom {
+          transform: rotate(180deg);
+        }
+      }
     }
     .arrow-icon {
       transition: transform 0.25s ease-in-out;
@@ -54,11 +64,11 @@
     }
   }
   .Burn-submenu {
-    display: none;
+    // display: none;
     list-style: none;
     padding-left: 0;
     white-space: nowrap;
-    transition: $menu-transition;
+    // transition: $menu-transition;
     .Burn-menu-item {
       padding: $menu-item-padding-y $menu-item-padding-x;
       cursor: pointer;
@@ -71,7 +81,7 @@
     }
   }
   .Burn-submenu.menu-opened {
-    display: block;
+    // display: block;
   }
 }
 .menu-horizontal {

@@ -2,7 +2,7 @@ import * as React from 'react'
 import './index.scss'
 
 interface Icon {
-  name: string
+  name: string,
 }
 export default (props: Icon) => {
   return (
