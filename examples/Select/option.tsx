@@ -15,9 +15,7 @@ export const Option: FC<OptionProps> = (props) => {
   const context = useContext(SelectContext)
   const classes = classnames('Burn-selecte', className, {})
   const handleClick = () => {
-    if (context.Active) {
-      context.Active(value)
-    }
+    context.Active && context.Active(value)
   }
   return (
     <li className={classes} style={style} onClick={handleClick}>
@@ -25,5 +23,6 @@ export const Option: FC<OptionProps> = (props) => {
     </li>
   )
 }
+
 Option.displayName = 'Option'
 export default Option

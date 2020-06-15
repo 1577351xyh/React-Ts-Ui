@@ -1,8 +1,10 @@
 import * as React from 'react'
 import * as classnames from 'classnames'
-import { FC, CSSProperties, createContext, useState } from 'react'
+import { FC, CSSProperties, createContext, ChangeEvent, useState } from 'react'
 import Input, { InputProps } from '../Input/input'
 import { OptionProps } from './option'
+import Transition from '../Transition'
+
 export interface SelectProps extends Omit<InputProps, 'onSelect'> {
   className?: string
   style?: CSSProperties
@@ -27,14 +29,29 @@ export const Select: FC<SelectProps> = (props) => {
   } = props
 
   const classes = classnames('Burn-selecte', className, {})
-  const [value, setValue] = useState(defaultValue)
+  const [inputValue, setValue] = useState(defaultValue)
+  const [optionOpen, setOptionOpen] = useState(false)
 
   const handeClick = (value: string) => {
     setValue(value)
   }
+
   const SelectContestValue: SelectProps = {
     value: defaultValue || '',
     Active: handeClick,
+  }
+
+  // 非受控组件
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.trim()
+    setValue(value)
+  }
+
+  const isShowSearch = () => {
+    if (showSearch) {
+      return false
+    }
+    return true
   }
 
   const renderChildren = () => {
@@ -53,11 +70,26 @@ export const Select: FC<SelectProps> = (props) => {
       }
     })
   }
+
+  const clickOut = () => {
+    setOptionOpen(!optionOpen)
+  }
+
   return (
     <SelectContext.Provider value={SelectContestValue}>
       <div className={classes} style={style}>
-        <Input {...resProps} value={value} readOnly></Input>
-        <ul className="Burn-select-warpper">{renderChildren()}</ul>
+        <div onClick={clickOut}>
+          <Input
+            {...resProps}
+            onChange={handleChange}
+            value={inputValue}
+            readOnly={isShowSearch()}
+          ></Input>
+        </div>
+
+        <Transition in={optionOpen} timeout={300} animation="zoom-in-top">
+          <ul className="Burn-select-warpper">{renderChildren()}</ul>
+        </Transition>
       </div>
     </SelectContext.Provider>
   )

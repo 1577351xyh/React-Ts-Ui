@@ -1,0 +1,19 @@
+.Burn-selecte {
+  position: relative;
+  .Burn-select-warpper {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: $box-shadow;
+    width: 100%;
+    li {
+      padding: 6px 10px;
+      cursor: pointer;
+      &:hover {
+        background-color: $item-hover-color;
+      }
+    }
+  }
+}
