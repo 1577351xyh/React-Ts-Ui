@@ -52,6 +52,7 @@ module.exports = function (env, argv) {
         examples: path.resolve(__dirname, 'examples'),
         lib: path.resolve(__dirname, 'lib'),
         type: path.resolve(__dirname, 'type'),
+        hooks: path.resolve(__dirname, 'hooks')
       },
       // 没有路径时,webpack默认会在这个路径下查找
       modules: [

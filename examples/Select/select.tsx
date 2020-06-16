@@ -1,10 +1,18 @@
 import * as React from 'react'
 import * as classnames from 'classnames'
-import { FC, CSSProperties, createContext, ChangeEvent, useState } from 'react'
+import {
+  FC,
+  CSSProperties,
+  createContext,
+  ChangeEvent,
+  useState,
+  useRef,
+  useEffect,
+} from 'react'
 import Input, { InputProps } from '../Input/input'
 import { OptionProps } from './option'
 import Transition from '../Transition'
-
+import useClickOutside from 'hooks/useClickOutside'
 export interface SelectProps extends Omit<InputProps, 'onSelect'> {
   className?: string
   style?: CSSProperties
@@ -31,6 +39,10 @@ export const Select: FC<SelectProps> = (props) => {
   const classes = classnames('Burn-selecte', className, {})
   const [inputValue, setValue] = useState(defaultValue)
   const [optionOpen, setOptionOpen] = useState(false)
+  const componentRef = useRef<HTMLDivElement>(null)
+  useClickOutside(componentRef, () => {
+    setOptionOpen(false)
+  })
 
   const handeClick = (value: string) => {
     setValue(value)
@@ -77,7 +89,7 @@ export const Select: FC<SelectProps> = (props) => {
 
   return (
     <SelectContext.Provider value={SelectContestValue}>
-      <div className={classes} style={style}>
+      <div className={classes} style={style} ref={componentRef}>
         <div onClick={clickOut}>
           <Input
             {...resProps}
