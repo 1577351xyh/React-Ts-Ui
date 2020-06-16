@@ -18,14 +18,8 @@ export default function Button() {
   }
   return (
     <div>
-      <Input
-        style={{ width: '300px' }}
-        placeholder="input with icon"
-        icon="search"
-        defaultValue="1"
-      />
       <Select
-        defaultValue="lucy"
+        defaultValue=""
         style={{ width: 120 }}
         onChange={handleChange}
         placeholder="请选择"

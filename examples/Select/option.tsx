@@ -8,6 +8,7 @@ export interface OptionProps {
   style?: CSSProperties
   value?: any
   disabled?: boolean
+  children: any
 }
 
 export const Option: FC<OptionProps> = (props) => {
@@ -16,6 +17,7 @@ export const Option: FC<OptionProps> = (props) => {
   const classes = classnames('Burn-selecte', className, {})
   const handleClick = () => {
     context.Active && context.Active(value)
+    context.selecteOpen && context.selecteOpen(false)
   }
   return (
     <li className={classes} style={style} onClick={handleClick}>

@@ -21,6 +21,7 @@ export interface SelectProps extends Omit<InputProps, 'onSelect'> {
   // 单选模式可搜索
   showSearch?: boolean
   Active?: (value: string) => void
+  selecteOpen?: (open: boolean) => void
 }
 
 export const SelectContext = createContext<SelectProps>({ value: '' })
@@ -37,26 +38,28 @@ export const Select: FC<SelectProps> = (props) => {
   } = props
 
   const classes = classnames('Burn-selecte', className, {})
-  const [inputValue, setValue] = useState(defaultValue)
+  const [inputValue, setValue] = useState(defaultValue as string)
   const [optionOpen, setOptionOpen] = useState(false)
   const componentRef = useRef<HTMLDivElement>(null)
   useClickOutside(componentRef, () => {
     setOptionOpen(false)
   })
-
   const handeClick = (value: string) => {
     setValue(value)
   }
-
   const SelectContestValue: SelectProps = {
     value: defaultValue || '',
     Active: handeClick,
+    selecteOpen: setOptionOpen,
   }
 
   // 非受控组件
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim()
     setValue(value)
+    if (showSearch) {
+      renderChildren(inputValue)
+    }
   }
 
   const isShowSearch = () => {
@@ -66,14 +69,22 @@ export const Select: FC<SelectProps> = (props) => {
     return true
   }
 
-  const renderChildren = () => {
+  const renderChildren = (inputValue: string) => {
     return React.Children.map(children, (child, index) => {
       const childrenElement = child as React.FunctionComponentElement<
         OptionProps
       >
       const { displayName } = childrenElement.type
+      const { children, value } = childrenElement.props
       if (displayName === 'Option') {
-        return React.cloneElement(childrenElement, {})
+        if (!showSearch) {
+          return React.cloneElement(childrenElement, {})
+        }
+        if (value.indexOf(inputValue) > -1 || !inputValue) {
+          return React.cloneElement(childrenElement, {})
+        } else {
+          return null
+        }
       } else {
         console.error(
           'Warning: Menu has a child which is not a Option component'
@@ -100,7 +111,7 @@ export const Select: FC<SelectProps> = (props) => {
         </div>
 
         <Transition in={optionOpen} timeout={300} animation="zoom-in-top">
-          <ul className="Burn-select-warpper">{renderChildren()}</ul>
+          <ul className="Burn-select-warpper">{renderChildren(inputValue)}</ul>
         </Transition>
       </div>
     </SelectContext.Provider>
