@@ -10,6 +10,7 @@ import {
   useEffect,
 } from 'react'
 import Input, { InputProps } from '../Input/input'
+import Icon from '../Icon'
 import { OptionProps } from './option'
 import Transition from '../Transition'
 import useClickOutside from 'hooks/useClickOutside'
@@ -20,12 +21,14 @@ export interface SelectProps extends Omit<InputProps, 'onSelect'> {
   mode?: boolean
   // 单选模式可搜索
   showSearch?: boolean
+  // 多选
+  multiple?: boolean
   Active?: (value: string) => void
   selecteOpen?: (open: boolean) => void
+  multipleClick?: (value: object) => void
 }
 
 export const SelectContext = createContext<SelectProps>({ value: '' })
-
 export const Select: FC<SelectProps> = (props) => {
   const {
     className,
@@ -34,23 +37,59 @@ export const Select: FC<SelectProps> = (props) => {
     showSearch,
     children,
     defaultValue,
+    multiple,
+    onChange,
     ...resProps
   } = props
-
   const classes = classnames('Burn-selecte', className, {})
   const [inputValue, setValue] = useState(defaultValue as string)
   const [optionOpen, setOptionOpen] = useState(false)
+  let [select, setSelecte] = useState<any>([])
+  // console.log(select)
   const componentRef = useRef<HTMLDivElement>(null)
   useClickOutside(componentRef, () => {
     setOptionOpen(false)
   })
-  const handeClick = (value: string) => {
+  const handeClick = (value: any) => {
     setValue(value)
+    onChange && onChange(value)
+  }
+  const handClose = (e: any, index: number) => {
+    e.stopPropagation()
+    console.log(select)
+    // debugger
+  }
+  const multipleClick = (childrenItem: any) => {
+    let indexOf = true
+    select.forEach((element: any) => {
+      const el = element.props.children[0]
+      if (el === childrenItem.lable) {
+        indexOf = false
+      }
+    })
+    if (!indexOf) return
+    let arr = select.map((vm: any) => vm.props.children[0])
+    select = [...arr, childrenItem.lable].map((item: any, index: number) => {
+      return typeof item === 'string' ? (
+        <span key={index}>
+          {item}
+          <span onClick={(e) => handClose(e, index)}>
+            <Icon name="cha"></Icon>
+          </span>
+        </span>
+      ) : (
+        item
+      )
+    })
+    console.log('set')
+    setSelecte(select)
   }
   const SelectContestValue: SelectProps = {
     value: defaultValue || '',
     Active: handeClick,
+    multipleClick: multipleClick,
     selecteOpen: setOptionOpen,
+    multiple: multiple,
   }
 
   // 非受控组件
@@ -108,6 +147,9 @@ export const Select: FC<SelectProps> = (props) => {
             value={inputValue}
             readOnly={isShowSearch()}
           ></Input>
+          {select.length !== 0 ? (
+            <div className="Burn-select-multiple">{select}</div>
+          ) : null}
         </div>
 
         <Transition in={optionOpen} timeout={300} animation="zoom-in-top">

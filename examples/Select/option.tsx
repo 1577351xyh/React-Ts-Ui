@@ -16,8 +16,16 @@ export const Option: FC<OptionProps> = (props) => {
   const context = useContext(SelectContext)
   const classes = classnames('Burn-selecte', className, {})
   const handleClick = () => {
-    context.Active && context.Active(value)
-    context.selecteOpen && context.selecteOpen(false)
+    if (context.multiple) {
+      context.multipleClick &&
+        context.multipleClick({
+          lable: (children as string) || '',
+          key: (value as string) || '',
+        })
+    } else {
+      context.Active && context.Active(value)
+      context.selecteOpen && context.selecteOpen(false)
+    }
   }
   return (
     <li className={classes} style={style} onClick={handleClick}>

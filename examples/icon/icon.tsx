@@ -2,9 +2,9 @@ import * as React from 'react'
 import './index.scss'
 
 interface Icon {
-  name: string,
+  name: string
 }
-const Icon: React.FC<Icon>=(props) => {
+const Icon: React.FC<Icon> = (props) => {
   return (
     <svg className="Burn-icon" aria-hidden="true">
       <use xlinkHref={`#icon-${props.name}`}></use>
@@ -12,4 +12,3 @@ const Icon: React.FC<Icon>=(props) => {
   )
 }
 export default Icon
-
