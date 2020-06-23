@@ -11,42 +11,11 @@ import Input from './examples/Input'
 
 import { Select, Option } from './examples/Select'
 export default function Button() {
-  let [select, setSelecte] = useState<any>([])
-  console.log(select)
-  const add = () => {
-    multipleClick('1')
-  }
-  const handClose = (event: any, index: number) => {
-    console.log(select)
-  }
-  const multipleClick = (string:any) => {
-    
-    select = [...select, string].map((item: any, index: number) => {
-      return (
-        <div key={index}>
-          {item.toString()};
-          <span onClick={(event) => handClose(event, index)}>
-            <Icon name="cha"></Icon>
-          </span>
-        </div>
-      )
-    })
-    setSelecte(select)
-  }
-
   function handleChange(value: any) {
     console.log(`selected ${value}`)
   }
   return (
     <div>
-      <div>
-        <span>
-          <button onClick={multipleClick}>1111111</button>
-          <button onClick={add}>数组长度+1</button>
-          <div>{select}</div>
-        </span>
-      </div>
-
       <Select
         defaultValue=""
         style={{ width: 400 }}

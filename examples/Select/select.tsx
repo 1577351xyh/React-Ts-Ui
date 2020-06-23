@@ -45,7 +45,6 @@ export const Select: FC<SelectProps> = (props) => {
   const [inputValue, setValue] = useState(defaultValue as string)
   const [optionOpen, setOptionOpen] = useState(false)
   let [select, setSelecte] = useState<any>([])
-  // console.log(select)
   const componentRef = useRef<HTMLDivElement>(null)
   useClickOutside(componentRef, () => {
     setOptionOpen(false)
@@ -56,8 +55,13 @@ export const Select: FC<SelectProps> = (props) => {
   }
   const handClose = (e: any, index: number) => {
     e.stopPropagation()
-    console.log(select)
-    // debugger
+    // 根据key 来删除
+    select.forEach((i: any, j: number) => {
+      if (i.key === index.toString()) {
+        select.splice(j, 1)
+      }
+    })
+    setSelecte(Object.assign([], select))
   }
   const multipleClick = (childrenItem: any) => {
     let indexOf = true
@@ -69,6 +73,9 @@ export const Select: FC<SelectProps> = (props) => {
     })
     if (!indexOf) return
     let arr = select.map((vm: any) => vm.props.children[0])
+    renderSelect(arr, childrenItem)
+  }
+  const renderSelect = (arr: [string], childrenItem: any) => {
     select = [...arr, childrenItem.lable].map((item: any, index: number) => {
       return typeof item === 'string' ? (
         <span key={index}>
@@ -81,7 +88,6 @@ export const Select: FC<SelectProps> = (props) => {
         item
       )
     })
-    console.log('set')
     setSelecte(select)
   }
   const SelectContestValue: SelectProps = {

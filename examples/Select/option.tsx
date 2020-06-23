@@ -20,7 +20,7 @@ export const Option: FC<OptionProps> = (props) => {
       context.multipleClick &&
         context.multipleClick({
           lable: (children as string) || '',
-          key: (value as string) || '',
+          keys: (value as string) || '',
         })
     } else {
       context.Active && context.Active(value)
