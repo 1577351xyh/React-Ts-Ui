@@ -7,7 +7,6 @@ import {
   ChangeEvent,
   useState,
   useRef,
-  useEffect,
 } from 'react'
 import Input, { InputProps } from '../Input/input'
 import Icon from '../Icon'
@@ -23,7 +22,7 @@ export interface SelectProps extends Omit<InputProps, 'onSelect'> {
   showSearch?: boolean
   // 多选
   multiple?: boolean
-  Active?: (value: string) => void
+  Active?: (value: object) => void
   selecteOpen?: (open: boolean) => void
   multipleClick?: (value: object) => void
 }
@@ -49,9 +48,9 @@ export const Select: FC<SelectProps> = (props) => {
   useClickOutside(componentRef, () => {
     setOptionOpen(false)
   })
-  const handeClick = (value: any) => {
-    setValue(value)
-    onChange && onChange(value)
+  const handeClick = (item: any) => {
+    setValue(item.lable)
+    onChange && onChange(item.keys)
   }
   const handClose = (e: any, index: number) => {
     e.stopPropagation()

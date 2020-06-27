@@ -17,6 +17,11 @@
       &:hover {
         background-color: $item-hover-color;
       }
+      &.disabled {
+        color: $menu-item-disabled-color;
+        pointer-events: none;
+        cursor: default;
+      }
     }
   }
   .Burn-select-multiple {

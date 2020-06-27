@@ -12,9 +12,11 @@ export interface OptionProps {
 }
 
 export const Option: FC<OptionProps> = (props) => {
-  const { className, style, children, value } = props
+  const { className, style, children, value, disabled } = props
   const context = useContext(SelectContext)
-  const classes = classnames('Burn-selecte', className, {})
+  const classes = classnames('Burn-selecte', className, {
+    disabled: disabled,
+  })
   const handleClick = () => {
     if (context.multiple) {
       context.multipleClick &&
@@ -23,7 +25,11 @@ export const Option: FC<OptionProps> = (props) => {
           keys: (value as string) || '',
         })
     } else {
-      context.Active && context.Active(value)
+      context.Active &&
+        context.Active({
+          lable: (children as string) || '',
+          keys: (value as string) || '',
+        })
       context.selecteOpen && context.selecteOpen(false)
     }
   }
