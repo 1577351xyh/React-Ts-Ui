@@ -1,5 +1,19 @@
 // export default function Button() {
 //   return (
+// ;<Select
+//   defaultValue=""
+//   style={{ width: 400 }}
+//   onChange={handleChange}
+//   placeholder="请选择"
+//   multiple
+// >
+//   <Option value="1">Jack</Option>
+//   <Option value="2">Lucy</Option>
+//   <Option value="disabled" disabled>
+//     Disabled
+//   </Option>
+//   <Option value="Yiminghe">yiminghe</Option>
+// </Select>
 //     <div>
 //       {/* <Input
 //         style={{ width: '300px' }}

@@ -42,6 +42,7 @@ module.exports = function (env, argv) {
       port: 3000,
       //进度条
       progress: true,
+      open:true,
       stats: {
         // Add asset Information
         assets: false,
