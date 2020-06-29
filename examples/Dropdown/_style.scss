@@ -1,3 +1,27 @@
 .Burn-Dropdowm {
   display: inline-block;
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  .Burn-Dropdowm-warp {
+    ul {
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      z-index: 9;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      width: 100%;
+      .Burn-Menu-item {
+        padding: 4px 10px;
+      }
+    }
+  }
+
+  .Burn-Menu {
+    background-color: #fff;
+    z-index: 9;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    width: 100%;
+  }
 }

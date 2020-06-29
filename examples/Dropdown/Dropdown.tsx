@@ -11,7 +11,6 @@ import {
 import Transition from '../Transition'
 import useClickOutside from 'hooks/useClickOutside'
 import { MenuItemProps } from './MenuItem'
-
 // export const SelectContext = createContext<SelectProps>({ value: '' })
 type event = 'click' | 'hover'
 export interface DropdowmProps {
@@ -30,6 +29,7 @@ export const Dropdowm: FC<DropdowmProps> = (props) => {
   useClickOutside(componentRef, () => {
     setMenuOpen(false)
   })
+
   const isOpen = () => {
     setMenuOpen(!menuOpen)
   }
@@ -41,23 +41,26 @@ export const Dropdowm: FC<DropdowmProps> = (props) => {
       })
     }
   }
+
   hoverClose()
   return (
     <div ref={componentRef} className={classes}>
       {trigger === 'click' ? (
-        <div onClick={isOpen}>{children}</div>
+        <ul onClick={isOpen}>{children}</ul>
       ) : (
-        <div
+        <ul
           onMouseEnter={() => {
             setMenuOpen(true)
           }}
         >
           {children}
-        </div>
+        </ul>
       )}
-      <Transition in={menuOpen} timeout={300} wrapper animation="zoom-in-top">
-        {overlayArr}
-      </Transition>
+      <div className="Burn-Dropdowm-warp">
+        <Transition in={menuOpen} timeout={300} wrapper animation="zoom-in-top">
+          {overlayArr}
+        </Transition>
+      </div>
     </div>
   )
 }

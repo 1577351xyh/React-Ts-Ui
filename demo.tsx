@@ -5,7 +5,7 @@ import Icon from './examples/Icon/icon'
 import Tabs from './examples/Tabs/tab'
 import TabPane from './examples/Tabs/tabPane'
 // import Menu from './examples/Menu/menu'
-import Menu, { Dropdowm } from './examples/Dropdown/'
+import Menu, { Dropdowm } from './examples/Dropdown/index'
 import MenuItem from './examples/Menu/menuItem'
 import SubMenu from './examples/Menu/subMenu'
 import Input from './examples/Input'
@@ -53,20 +53,6 @@ export default function Button() {
           Hover me
         </a>
       </Dropdowm>
-      {/* <Select
-        defaultValue=""
-        style={{ width: 120 }}
-        onChange={handleChange}
-        placeholder="请选择"
-        showSearch
-      >
-        <Option value="jack">Jack</Option>
-        <Option value="lucy">Lucy</Option>
-        <Option value="disabled" disabled>
-          Disabled
-        </Option>
-        <Option value="Yiminghe">yiminghe</Option>
-      </Select> */}
     </div>
   )
 }

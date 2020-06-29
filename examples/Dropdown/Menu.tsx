@@ -12,6 +12,7 @@ export interface MenuProps {
 export const Menu: FC<MenuProps> = (props) => {
   const { className, style, children, ...resProps } = props
   const classes = classnames('Burn-Menu', className, {})
-  return <ul>{children}</ul>
+
+  return <ul className={classes}>{children}</ul>
 }
 export default Menu

@@ -8,7 +8,7 @@ export interface MenuItemProps {
 export const MenuItem: FC<MenuItemProps> = (props) => {
   const { className, style, children, ...resProps } = props
   const classes = classnames('Burn-Menu-item', className, {})
-  return <li>{children}</li>
+  return <li className={classes}>{children}</li>
 }
 MenuItem.displayName = 'MenuItem'
 export default MenuItem
