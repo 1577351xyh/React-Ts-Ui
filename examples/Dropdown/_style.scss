@@ -14,6 +14,20 @@
       width: 100%;
       .Burn-Menu-item {
         padding: 4px 10px;
+        cursor: pointer;
+        white-space: nowrap;
+        &:hover {
+          background-color: $item-hover-color;
+        }
+        &.disabled {
+          color: $menu-item-disabled-color !important;
+          background-color: #d9d9d9;
+          pointer-events: none;
+          cursor: default;
+          a {
+            color: $menu-item-disabled-color !important;
+          }
+        }
       }
     }
   }
@@ -23,5 +37,21 @@
     z-index: 9;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     width: 100%;
+  }
+  .Burn-sub-menu {
+    position: relative;
+    padding: 4px 10px;
+    cursor: pointer;
+    &:hover {
+      background-color: $item-hover-color;
+    }
+    .Burn-sub-menu-ground {
+      position: absolute;
+      top: 0;
+      left: calc(100% + 8px);
+      background-color: #fff;
+      z-index: 9;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
   }
 }

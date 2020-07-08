@@ -4,10 +4,13 @@ import { FC, CSSProperties, createContext, useState, useRef } from 'react'
 export interface MenuItemProps {
   className?: string
   style?: string
+  disabled?: boolean
 }
 export const MenuItem: FC<MenuItemProps> = (props) => {
-  const { className, style, children, ...resProps } = props
-  const classes = classnames('Burn-Menu-item', className, {})
+  const { className, style, children, disabled, ...resProps } = props
+  const classes = classnames('Burn-Menu-item', className, {
+    disabled,
+  })
   return <li className={classes}>{children}</li>
 }
 MenuItem.displayName = 'MenuItem'

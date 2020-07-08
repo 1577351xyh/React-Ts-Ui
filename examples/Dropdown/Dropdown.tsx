@@ -18,17 +18,23 @@ export interface DropdowmProps {
   style?: string
   overlayArr?: any
   trigger?: event
+  clearOpen?: () => void
 }
 
+export const DropdowmContext = createContext<DropdowmProps>({})
 export const Dropdowm: FC<DropdowmProps> = (props) => {
   const { className, style, children, overlayArr, trigger, ...resProps } = props
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(true)
   const classes = classnames('Burn-Dropdowm', className, {})
   const componentRef = useRef<HTMLDivElement>(null)
-
   useClickOutside(componentRef, () => {
     setMenuOpen(false)
   })
+
+  const clearOpen = () => {}
+  const ContestValue: DropdowmProps = {
+    clearOpen: clearOpen,
+  }
 
   const isOpen = () => {
     setMenuOpen(!menuOpen)
@@ -44,27 +50,36 @@ export const Dropdowm: FC<DropdowmProps> = (props) => {
 
   hoverClose()
   return (
-    <div ref={componentRef} className={classes}>
-      {trigger === 'click' ? (
-        <ul onClick={isOpen}>{children}</ul>
-      ) : (
-        <ul
-          onMouseEnter={() => {
-            setMenuOpen(true)
-          }}
-        >
-          {children}
-        </ul>
-      )}
-      <div className="Burn-Dropdowm-warp">
-        <Transition in={menuOpen} timeout={300} wrapper animation="zoom-in-top">
-          {overlayArr}
-        </Transition>
+    <DropdowmContext.Provider value={ContestValue}>
+      <div ref={componentRef} className={classes} {...resProps}>
+        {trigger === 'click' ? (
+          <ul onClick={isOpen}>{children}</ul>
+        ) : (
+          <ul
+            onMouseEnter={() => {
+              setMenuOpen(true)
+            }}
+          >
+            {children}
+          </ul>
+        )}
+        <div className="Burn-Dropdowm-warp">
+          <Transition
+            in={menuOpen}
+            timeout={300}
+            wrapper
+            animation="zoom-in-top"
+          >
+            {overlayArr}
+          </Transition>
+        </div>
       </div>
-    </div>
+    </DropdowmContext.Provider>
   )
 }
+
 Dropdowm.defaultProps = {
   trigger: 'click',
 }
+
 export default Dropdowm
