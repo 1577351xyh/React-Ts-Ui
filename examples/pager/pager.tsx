@@ -4,15 +4,20 @@ import { FC } from 'react'
 import { useState } from 'react'
 import Button from 'examples/Button'
 export interface PagerProps {
-  current?: number
+  current?: number | 1
   total: number
   defaultCurrent?: number
   className?: string
   style?: string
+  onChange?: (value: number) => void
 }
 
 const Pager = (props: PagerProps) => {
-  const { current, className, style, total, defaultCurrent } = props
+  let { current, className, style, total, defaultCurrent, onChange } = props
+  if (!current) {
+    current = 1
+  }
+  const [currentValue, setCurrent] = useState(current)
   const arr = range(1, total)
   const classes = classnames('Burn-pager', className, {})
   const itemPager = classnames('Burn-item', className, {})
@@ -25,15 +30,58 @@ const Pager = (props: PagerProps) => {
     return result
   }
 
-  const renderChidren = () => {
-    return arr.map((item) => {
-      return <span key={item} className={itemPager}>{item}</span>
-    })
+  const onClickItem = (val: number, e: React.MouseEvent<HTMLSpanElement>) => {
+    if (val <= props.total && val >= 1) {
+      setCurrent(val)
+      onChange && onChange(val)
+      renderChidren(currentValue)
+    }
   }
+
+  const jumpPage = (index: number, currentValue: number) => {
+    const prev = currentValue - 5 <= 0 ? 1 : currentValue - 5
+    const next = currentValue + 5 >= props.total ? props.total : currentValue + 5
+    return index === 1 ? prev : next
+  }
+
+  const renderChidren = (currentValue: number) => {
+    return arr
+      .filter(
+        (item) =>
+          item === 1 || item === total || Math.abs(item - currentValue) <= 3
+      )
+      .reduce((prev, next) => {
+        const last = prev[prev.length - 1]
+        const x = last !== -1 && last - next < -1
+        return prev.concat(x ? [-1, next] : [next])
+      }, [] as number[])
+      .map((item, index) =>
+        item === -1 ? (
+          <span
+            key={item}
+            onClick={(e) => onClickItem(jumpPage(index, currentValue), e)}
+          >
+            ...
+          </span>
+        ) : (
+          <span
+            key={item}
+            className={classnames({
+              'Burn-item': true,
+              active: item === currentValue,
+            })}
+            onClick={(e) => onClickItem(item, e)}
+          >
+            {item}
+          </span>
+        )
+      )
+  }
+
   return (
     <div className={classes}>
       <Button icon="left"></Button>
-      {renderChidren()}
+      {renderChidren(currentValue)}
       <Button icon="right"></Button>
     </div>
   )

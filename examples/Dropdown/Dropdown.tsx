@@ -24,7 +24,7 @@ export interface DropdowmProps {
 export const DropdowmContext = createContext<DropdowmProps>({})
 export const Dropdowm: FC<DropdowmProps> = (props) => {
   const { className, style, children, overlayArr, trigger, ...resProps } = props
-  const [menuOpen, setMenuOpen] = useState(true)
+  const [menuOpen, setMenuOpen] = useState(false)
   const classes = classnames('Burn-Dropdowm', className, {})
   const componentRef = useRef<HTMLDivElement>(null)
   useClickOutside(componentRef, () => {

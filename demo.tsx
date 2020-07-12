@@ -16,6 +16,9 @@ export default function Button() {
   function handleChange(value: any) {
     console.log(`selected ${value}`)
   }
+  function x(value: any) {
+    console.log(value)
+  }
   const a = (
     <Menu>
       <Menu.Item>
@@ -75,7 +78,7 @@ export default function Button() {
           Hover me
         </a>
       </Dropdowm>
-      <Pager defaultCurrent={1} total={10}></Pager>
+      <Pager defaultCurrent={1} onChange={x} current={1} total={10}></Pager>
     </div>
   )
 }
