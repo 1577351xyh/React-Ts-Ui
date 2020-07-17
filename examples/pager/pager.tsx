@@ -18,7 +18,6 @@ const Pager = (props: PagerProps) => {
     current = 1
   }
   const [currentValue, setCurrent] = useState(current)
-  const arr = range(1, total)
   const classes = classnames('Burn-pager', className, {})
   const itemPager = classnames('Burn-item', className, {})
 
@@ -40,22 +39,23 @@ const Pager = (props: PagerProps) => {
 
   const jumpPage = (index: number, currentValue: number) => {
     const prev = currentValue - 5 <= 0 ? 1 : currentValue - 5
-    const next = currentValue + 5 >= props.total ? props.total : currentValue + 5
+    const next =
+      currentValue + 5 >= props.total ? props.total : currentValue + 5
     return index === 1 ? prev : next
   }
 
   const renderChidren = (currentValue: number) => {
-    return arr
+    return range(1, total)
       .filter(
         (item) =>
-          item === 1 || item === total || Math.abs(item - currentValue) <= 3
+          item === 1 || item === total || Math.abs(item - currentValue) <= 2
       )
       .reduce((prev, next) => {
         const last = prev[prev.length - 1]
         const x = last !== -1 && last - next < -1
         return prev.concat(x ? [-1, next] : [next])
       }, [] as number[])
-      .map((item, index) =>
+      .map((item: any, index: number) =>
         item === -1 ? (
           <span
             key={item}
@@ -80,9 +80,15 @@ const Pager = (props: PagerProps) => {
 
   return (
     <div className={classes}>
-      <Button icon="left"></Button>
+      <Button
+        icon="left"
+        onClick={(e) => onClickItem(currentValue - 1, e)}
+      ></Button>
       {renderChidren(currentValue)}
-      <Button icon="right"></Button>
+      <Button
+        icon="right"
+        onClick={(e) => onClickItem(currentValue + 1, e)}
+      ></Button>
     </div>
   )
 }

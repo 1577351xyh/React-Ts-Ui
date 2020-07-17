@@ -78,7 +78,7 @@ export default function Button() {
           Hover me
         </a>
       </Dropdowm>
-      <Pager defaultCurrent={1} onChange={x} current={1} total={10}></Pager>
+      <Pager defaultCurrent={1} onChange={x} current={1} total={5}></Pager>
     </div>
   )
 }
