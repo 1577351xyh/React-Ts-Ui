@@ -45,11 +45,15 @@ const Pager = (props: PagerProps) => {
   }
 
   const renderChidren = (currentValue: number) => {
-    return range(1, total)
-      .filter(
+    let arr = range(1, total)
+    if (total > 6) {     
+      arr = arr.filter(
+        // 小周附体
         (item) =>
           item === 1 || item === total || Math.abs(item - currentValue) <= 2
       )
+    }
+    return arr
       .reduce((prev, next) => {
         const last = prev[prev.length - 1]
         const x = last !== -1 && last - next < -1
